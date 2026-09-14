@@ -19,6 +19,21 @@ export default function ScrollReveal({
   const domRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (typeof window === "undefined" || !("IntersectionObserver" in window)) {
+      setIsVisible(true);
+      return;
+    }
+
+    const currentEl = domRef.current;
+
+    // Check if element is already within or near viewport on mount
+    if (currentEl) {
+      const rect = currentEl.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 150) {
+        setIsVisible(true);
+      }
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -35,17 +50,22 @@ export default function ScrollReveal({
         });
       },
       {
-        rootMargin: "0px 0px -40px 0px",
-        threshold: 0.08,
+        rootMargin: "150px 0px 150px 0px",
+        threshold: 0.01,
       }
     );
 
-    const currentEl = domRef.current;
     if (currentEl) {
       observer.observe(currentEl);
     }
 
+    // Fail-safe: ensure sections are never stuck invisible
+    const safetyTimer = setTimeout(() => {
+      setIsVisible(true);
+    }, 600);
+
     return () => {
+      clearTimeout(safetyTimer);
       if (currentEl) {
         observer.unobserve(currentEl);
       }

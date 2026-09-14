@@ -52,7 +52,7 @@ const projects: ProjectItem[] = [
     imageAlt: "RAG-Based AI Teaching Assistant Dashboard — Semantic Search and Video Timestamp Sync",
     tags: ["Python", "Streamlit", "FFmpeg", "Embeddings"],
     caseStudyHref: "/projects/rag-teaching-assistant",
-    codeHref: "https://github.com/Arykashid/RAG---BasedAI-Assistant",
+    codeHref: "https://github.com/Arykashid/RAG---Based-AI-Assistant",
   },
 ];
 

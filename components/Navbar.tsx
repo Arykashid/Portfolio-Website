@@ -1,9 +1,9 @@
-"useclient";
+"use client";
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight, Download } from "lucide-react";
 
 interface NavbarProps {
   onResumeClick?: () => void;
@@ -119,6 +119,15 @@ export default function Navbar({ onResumeClick }: NavbarProps) {
         {/* Action Buttons (Desktop & Tablet) */}
         <div className="flex items-center gap-3">
           <a
+            href="/resume.pdf"
+            download="Ary_Kashid_Resume.pdf"
+            className="hidden sm:inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded bg-[#1b1c1e] text-[#f4f4f5] font-sans text-xs font-medium hover:bg-[#292a2c] hover:text-[#ffffff] transition-colors border border-[#444749]/40 min-h-[44px]"
+          >
+            <Download size={14} className="text-[#f7bd55]" />
+            <span>Resume (PDF)</span>
+          </a>
+
+          <a
             href="#contact"
             className="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded bg-[#ffffff] text-[#121315] font-sans text-xs font-semibold hover:bg-[#f7bd55] transition-colors shadow-sm min-h-[44px] min-w-[44px]"
           >
@@ -174,6 +183,16 @@ export default function Navbar({ onResumeClick }: NavbarProps) {
               >
                 Get in Touch
               </a>
+              <a
+                href="/resume.pdf"
+                download="Ary_Kashid_Resume.pdf"
+                onClick={handleLinkClick}
+                className="w-full py-3 rounded bg-[#1b1c1e] text-[#f4f4f5] font-sans text-center text-sm font-medium border border-[#444749]/40 hover:bg-[#292a2c] transition-colors min-h-[44px] flex items-center justify-center gap-2"
+              >
+                <Download size={16} className="text-[#f7bd55]" />
+                <span>Download Resume (PDF)</span>
+              </a>
+
               {onResumeClick && (
                 <button
                   type="button"
@@ -181,10 +200,10 @@ export default function Navbar({ onResumeClick }: NavbarProps) {
                     handleLinkClick();
                     onResumeClick();
                   }}
-                  className="w-full py-3 rounded bg-[#1b1c1e] text-[#f4f4f5] font-sans text-center text-sm font-medium border border-[#444749]/40 hover:bg-[#292a2c] transition-colors min-h-[44px] flex items-center justify-center gap-2"
+                  className="w-full py-2.5 text-[#c4c7c9] hover:text-[#ffffff] font-sans text-center text-xs font-medium transition-colors flex items-center justify-center gap-1.5"
                 >
-                  <span>View Resume / CV</span>
-                  <ArrowUpRight size={16} />
+                  <span>Preview CV Online</span>
+                  <ArrowUpRight size={14} />
                 </button>
               )}
             </div>

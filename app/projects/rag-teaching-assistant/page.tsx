@@ -373,7 +373,7 @@ export default function RagTeachingAssistantPage() {
               {/* Action Buttons */}
               <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                 <a
-                  href="https://github.com/Arykashid/RAG---BasedAI-Assistant"
+                  href="https://github.com/Arykashid/RAG---Based-AI-Assistant"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-6 py-3.5 rounded-xl bg-[#ffffff] text-[#121315] font-sans text-sm font-semibold hover:bg-[#f7bd55] transition-colors inline-flex items-center justify-center gap-2 shadow-lg min-h-[44px]"
