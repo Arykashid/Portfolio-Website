@@ -4,7 +4,7 @@ import https from 'https';
 
 const images = [
   {
-    url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCDEICUivY938KWpD12eZxtAoIyivO6HNMv8lgmudDDLMQ0TJCnK1PY2Af52im5aoP4escEAUCgepnhnb94jDAfptYclsHJSb7owjAYyp9Yb3VA-aDcyUkeLMM8LhMSZpU7lGYsnuMUC9jhIxqBZegDC9bpN_vMTGcC3V9boEnthcNhh7mtOgPF7iZz446xWX26CpdGI49_ABb0VB9MxG1R6DY3ZPvAYwlA2UuFCM_ThLnt5ilVQBCK7zUjozZQg2Vfkw',
+    url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCDEICUivY938KWpD12eZxtAoIyivO6HNMv8lgmudDDLMQ0TJCnK1PY2Af52im5aoP4escEAUCgepnhnb94jDAfptYclsHJSb7owjAYyp9Yb3VA-aDcyUkeLMM8LhMSZpU7lGYsnuMUC9jhIxqBZegDC9bpN_vMTGcC3V9boEnthcNhh7mtOgPF7iZz446xWX26CpdGI49_ABb0VB9MxG1R6DY3ZPvAYwlA2UuFCM_ThLnt5ilVQBCK7zUjozZQg2Vfkw=s0',
     dest: 'public/images/ary-hero-profile.jpg'
   },
   {
@@ -12,11 +12,11 @@ const images = [
     dest: 'public/images/ary-portrait-real.jpg'
   },
   {
-    url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDavgA240rEvKxB1Raec-a9kyCdyXMqGRVHH4ReQM1yhmyLSr5tP9mj-QVNZGA38m2w3fiJXmykrKL4CYBDW-EZA5Msg9Zxgl6XR_VOmD9QsBkLaTPXRnoyKY_cvLDYSjFfUWI6hjHJdj7rc5hSgAlOJvI0cFuTE7fcVY1E27wi0j7ksk7E8WpQgm_0ueLBxRKOGhGTVrL55Ier6GX4EFr3UnIswmzbTTR0QD2aBHJdXcLSXU7Om01r75W5not4gqg8DA',
+    url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDavgA240rEvKxB1Raec-a9kyCdyXMqGRVHH4ReQM1yhmyLSr5tP9mj-QVNZGA38m2w3fiJXmykrKL4CYBDW-EZA5Msg9Zxgl6XR_VOmD9QsBkLaTPXRnoyKY_cvLDYSjFfUWI6hjHJdj7rc5hSgAlOJvI0cFuTE7fcVY1E27wi0j7ksk7E8WpQgm_0ueLBxRKOGhGTVrL55Ier6GX4EFr3UnIswmzbTTR0QD2aBHJdXcLSXU7Om01r75W5not4gqg8DA=s0',
     dest: 'public/images/crashguard-ai.png'
   },
   {
-    url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAJQpfD-nyM8Q2JaCcDJy4mRrZBJSdghUMXVpY_7L-jlvxwXghRVciJjhQei-bRYXQsOiYrqiTXggl4fqYJR4fLz4nMyPpHuNd8OGZVlPRhzLlOrIg04q05DoMkQwBYR9B07Rl07bryr5vXx1UKK1xKWNywFnEOknLK0Mu5XntEHt0rE7gM71Kdq7RTrj-_BOchsu6D8kQ5G-L1Xu4zkhcC3qiwK-aYnpj0c5FUU3pttFT4XFbEs2VLB18gBcRUHYx6YA',
+    url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAJQpfD-nyM8Q2JaCcDJy4mRrZBJSdghUMXVpY_7L-jlvxwXghRVciJjhQei-bRYXQsOiYrqiTXggl4fqYJR4fLz4nMyPpHuNd8OGZVlPRhzLlOrIg04q05DoMkQwBYR9B07Rl07bryr5vXx1UKK1xKWNywFnEOknLK0Mu5XntEHt0rE7gM71Kdq7RTrj-_BOchsu6D8kQ5G-L1Xu4zkhcC3qiwK-aYnpj0c5FUU3pttFT4XFbEs2VLB18gBcRUHYx6YA=s0',
     dest: 'public/images/rag-teaching-assistant.png'
   },
   {

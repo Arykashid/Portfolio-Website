@@ -34,7 +34,7 @@ const engineeringSkills: SkillItem[] = [
   { name: "Vercel" },
   { name: "REST APIs" },
   { name: "Streamlit" },
-  { name: "Prometheus Telemetry" },
+  { name: "Linux" },
 ];
 
 interface MarqueeRowProps {

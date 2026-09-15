@@ -99,6 +99,7 @@ export default function ProjectsSection() {
                 src={project.imageSrc}
                 alt={project.imageAlt}
                 fill
+                unoptimized
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover object-top rounded-xl group-hover/thumb:scale-[1.03] transition-transform duration-500 ease-out"
               />

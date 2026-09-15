@@ -66,7 +66,7 @@ export default function ContactSection({ onResumeClick }: ContactSectionProps) {
                 type="button"
                 onClick={handleCopyEmail}
                 aria-label="Copy email address"
-                className="px-3 py-1.5 rounded bg-[#292a2c] hover:bg-[#343537] text-[#f4f4f5] font-label text-xs uppercase tracking-wider transition-colors ml-auto border border-[#444749]/40 flex items-center gap-1.5 min-h-[36px]"
+                className="px-3.5 py-2 rounded bg-[#292a2c] hover:bg-[#343537] text-[#f4f4f5] font-label text-xs uppercase tracking-wider transition-colors ml-auto border border-[#444749]/40 flex items-center gap-1.5 min-h-[44px]"
               >
                 {copied ? (
                   <>

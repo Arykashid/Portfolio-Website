@@ -8,13 +8,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   Terminal,
-  FileCode2,
-  CheckCircle2,
-  Video,
-  Database,
-  Search,
-  Sparkles,
-  Layers,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -68,185 +61,100 @@ export default function RagTeachingAssistantPage() {
               </div>
               <div className="lg:col-span-4 pb-1">
                 <p className="font-sans text-base sm:text-lg text-[#c4c7c9] leading-relaxed">
-                  Multimodal semantic retrieval and automated contextual question answering from unstructured video lectures.
+                  Retrieval-Augmented Generation system answering questions from video-based learning content through an end-to-end semantic retrieval pipeline.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Interface Viewport Shell & Screenshot */}
-          <div className="relative w-full rounded-2xl bg-[#0d0e10] overflow-hidden shadow-2xl border border-[#444749]/30 p-2 sm:p-3">
-            <div className="w-full bg-[#1b1c1e] rounded-xl overflow-hidden flex flex-col border border-[#444749]/20">
-              {/* Chrome Mockup Header */}
-              <div className="w-full px-4 sm:px-6 py-3 bg-[#1f2022] flex items-center justify-between border-b border-[#444749]/30">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#343537]" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#343537]" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#343537]" />
-                  <span className="ml-3 font-label text-xs text-[#8e9193] uppercase tracking-wider hidden sm:inline-block">
-                    rag-tutor.internal.ary.run // lecture-telemetry
-                  </span>
-                </div>
-                <div className="flex items-center gap-2 font-label text-xs text-[#c4c7c9]">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#292a2c] text-[#f7bd55]">
-                    16:9 // APPLICATION INTERFACE VIEW
-                  </span>
-                </div>
-              </div>
-
-              {/* Media Canvas with Screenshot & HUD */}
-              <div className="relative w-full aspect-[16/9] bg-[#0d0e10] flex items-center justify-center group overflow-hidden">
-                <Image
-                  src="/images/rag-teaching-assistant.png"
-                  alt="RAG-Based AI Teaching Assistant Interface"
-                  fill
-                  priority
-                  sizes="(max-width: 1200px) 100vw, 1320px"
-                  className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.015]"
-                />
-
-                {/* Technical Overlay HUD */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0d0e10]/95 via-[#0d0e10]/20 to-transparent pointer-events-none" />
-
-                <div className="absolute top-4 left-4 p-3 rounded-lg bg-[#0d0e10]/90 backdrop-blur-md hidden sm:flex flex-col gap-1 border border-[#444749]/40 pointer-events-none">
-                  <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#00daf3]" />
-                    <span className="font-label text-xs text-[#00daf3] tracking-wider font-semibold">
-                      WHISPER ASR: SYNCED
-                    </span>
-                  </div>
-                  <span className="font-code-inline text-xs text-[#c4c7c9]">
-                    LATENCY: 142ms // RRF K=60
-                  </span>
-                </div>
-
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between p-3.5 rounded-xl bg-[#1b1c1e]/90 backdrop-blur-md border border-[#444749]/40 flex-wrap gap-2 pointer-events-none">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-[#292a2c] flex items-center justify-center text-[#f7bd55]">
-                      <Video size={18} />
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="font-sans text-xs sm:text-sm text-[#ffffff] font-semibold">
-                        Lecture 04: Transformer Self-Attention &amp; Matrix Factorization
-                      </span>
-                      <span className="font-label text-[11px] text-[#8e9193]">
-                        Timestamp chunk 00:24:12 - 00:29:45 // Re-ranked relevance 0.942
-                      </span>
-                    </div>
-                  </div>
-                  <div className="hidden md:flex items-center gap-1.5 font-label text-xs text-[#f7bd55] bg-[#f7bd55]/10 px-3 py-1.5 rounded-lg border border-[#f7bd55]/30">
-                    <CheckCircle2 size={14} />
-                    <span>HALLUCINATION FILTER: PASS</span>
-                  </div>
-                </div>
-              </div>
+          {/* Interface Screenshot — static, not interactive */}
+          <figure className="w-full flex flex-col gap-3">
+            <div className="relative w-full rounded-2xl bg-[#1b1c1e] overflow-hidden shadow-2xl border border-[#444749]/30">
+              <Image
+                src="/images/rag-teaching-assistant.png"
+                alt="RAG-Based AI Teaching Assistant Interface"
+                width={1568}
+                height={672}
+                priority
+                unoptimized
+                className="w-full h-auto object-contain block"
+              />
             </div>
-          </div>
+            <figcaption className="text-xs sm:text-sm text-[#8e9193] font-sans">
+              <span className="text-[#ffffff] font-medium">RAG-Based AI Teaching Assistant</span> — Demoed here on a SQL course dataset as &ldquo;RAG based SQL Assistant.&rdquo;
+            </figcaption>
+          </figure>
 
           {/* Asymmetric Deep-Dive Technical Narrative */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
-            {/* Left Column: Telemetry & Capabilities */}
+            {/* Left Column */}
             <div className="lg:col-span-4 flex flex-col gap-6">
-              {/* Profile Card */}
-              <div className="p-6 rounded-2xl bg-[#1b1c1e] border border-[#444749]/30 flex flex-col gap-4 shadow-lg">
-                <div className="flex items-center justify-between">
-                  <span className="font-section-marker text-xs text-[#f7bd55] uppercase font-semibold">
-                    // SYSTEM PROFILE
-                  </span>
-                  <span className="font-label text-xs text-[#8e9193]">REV 2.4.0</span>
-                </div>
-
-                <div className="flex flex-col gap-2 divide-y divide-[#444749]/20 text-xs">
-                  <div className="flex justify-between py-2">
-                    <span className="font-label text-[#8e9193] uppercase">DOMAIN</span>
-                    <span className="font-sans font-medium text-[#ffffff]">Pedagogical Retrieval</span>
-                  </div>
-                  <div className="flex justify-between py-2">
-                    <span className="font-label text-[#8e9193] uppercase">TIMEFRAME</span>
-                    <span className="font-sans font-medium text-[#ffffff]">Q1 2025 // Production</span>
-                  </div>
-                  <div className="flex justify-between py-2">
-                    <span className="font-label text-[#8e9193] uppercase">RETRIEVAL TYPE</span>
-                    <span className="font-sans font-medium text-[#ffffff]">Hybrid Sparse/Dense</span>
-                  </div>
-                  <div className="flex justify-between py-2">
-                    <span className="font-label text-[#8e9193] uppercase">MODALITY</span>
-                    <span className="font-sans font-medium text-[#ffffff]">Video, Audio, Dense Text</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Accuracy & Vector Graph Card */}
-              <div className="p-6 rounded-2xl bg-[#1b1c1e] border border-[#444749]/30 flex flex-col gap-4 shadow-lg">
-                <div className="flex items-center justify-between">
-                  <span className="font-section-marker text-xs text-[#8e9193] uppercase">
-                    // GROUNDED ACCURACY
-                  </span>
-                  <span className="font-label text-xs text-[#f7bd55] font-semibold">+38.4%</span>
-                </div>
-
-                <div className="flex items-baseline gap-1.5">
-                  <span className="font-display text-4xl sm:text-5xl text-[#ffffff] font-normal">
-                    98.2
-                  </span>
-                  <span className="font-label text-base text-[#f7bd55] font-semibold">%</span>
-                  <span className="ml-auto font-label text-xs text-[#c4c7c9]">
-                    CITATION FIDELITY
-                  </span>
-                </div>
-
-                {/* SVG Vector Sparkline */}
-                <div className="w-full pt-2">
-                  <svg
-                    className="w-full h-14 text-[#f7bd55]"
-                    fill="none"
-                    viewBox="0 0 280 60"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M0 50 L35 46 L70 48 L105 32 L140 38 L175 22 L210 24 L245 12 L280 8"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                    />
-                    <path
-                      d="M0 50 L35 46 L70 48 L105 32 L140 38 L175 22 L210 24 L245 12 L280 8 L280 60 L0 60 Z"
-                      fill="currentColor"
-                      fillOpacity="0.1"
-                    />
-                    <circle cx="280" cy="8" fill="#f7bd55" r="4" />
-                  </svg>
-                  <div className="flex justify-between mt-1 font-label text-[10px] text-[#8e9193]">
-                    <span>RAW ASR INPUT</span>
-                    <span>RRF VECTOR GRAPH</span>
-                  </div>
-                </div>
-              </div>
-
               {/* Key Capabilities */}
-              <div className="p-6 rounded-2xl bg-[#1b1c1e] border border-[#444749]/30 flex flex-col gap-3 shadow-lg">
-                <span className="font-section-marker text-xs text-[#8e9193] uppercase font-semibold">
+              <div className="p-6 rounded-2xl bg-[#1b1c1e] border border-[#444749]/30 flex flex-col gap-4 shadow-lg">
+                <span className="font-section-marker text-xs text-[#f7bd55] uppercase font-semibold">
                   // KEY CAPABILITIES
                 </span>
-                <ul className="space-y-2.5 text-xs text-[#c4c7c9] leading-relaxed">
+                <ul className="space-y-3 text-xs text-[#c4c7c9] leading-relaxed">
                   <li className="flex items-start gap-2.5">
-                    <span className="text-[#f7bd55] font-code-inline font-bold">01</span>
-                    <span>Automated audio demuxing &amp; dynamic boundary chunking</span>
+                    <span className="text-[#f7bd55] font-code-inline font-bold shrink-0">01</span>
+                    <span>Video-to-text transcription via FFmpeg audio extraction and speech-to-text processing</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <span className="text-[#f7bd55] font-code-inline font-bold">02</span>
-                    <span>Sub-second exact video timestamp jumping</span>
+                    <span className="text-[#f7bd55] font-code-inline font-bold shrink-0">02</span>
+                    <span>Embedding generation and vector storage for timestamped lecture content</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <span className="text-[#f7bd55] font-code-inline font-bold">03</span>
-                    <span>Reciprocal rank fusion with strict citation guards</span>
+                    <span className="text-[#f7bd55] font-code-inline font-bold shrink-0">03</span>
+                    <span>Semantic retrieval to answer questions with reduced hallucinations through context-aware grounding</span>
                   </li>
                 </ul>
               </div>
+
+              {/* Tech Stack */}
+              <div className="p-6 rounded-2xl bg-[#1b1c1e] border border-[#444749]/30 flex flex-col gap-4 shadow-lg">
+                <div className="flex flex-col gap-1">
+                  <span className="font-section-marker text-xs text-[#f7bd55] uppercase font-semibold">
+                    // TECH STACK &amp; METHODOLOGIES
+                  </span>
+                  <span className="font-label text-xs text-[#8e9193] uppercase">
+                    Runtime, Libraries &amp; Frameworks
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    "Python",
+                    "NumPy",
+                    "Joblib",
+                    "Streamlit",
+                    "FFmpeg",
+                    "Speech-to-text transcription",
+                    "Embeddings-based semantic search",
+                    "Vector retrieval",
+                  ].map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-3 py-1.5 rounded-lg bg-[#292a2c] text-[#f4f4f5] font-label text-xs border border-[#444749]/30 hover:border-[#f7bd55]/50 transition-colors"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Action Button */}
+              <a
+                href="https://github.com/Arykashid/RAG---Based-AI-Assistant"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full px-6 py-3.5 rounded-xl bg-[#ffffff] text-[#121315] font-sans text-sm font-semibold hover:bg-[#f7bd55] transition-colors inline-flex items-center justify-center gap-2 shadow-lg min-h-[44px]"
+              >
+                <Terminal size={17} />
+                <span>View Repository</span>
+                <ArrowUpRight size={15} />
+              </a>
             </div>
 
-            {/* Right Column: Architectural Narrative Chapters & Tech Stack */}
+            {/* Right Column: Architectural Narrative */}
             <div className="lg:col-span-8 flex flex-col gap-8">
               {/* Chapter 01 */}
               <div className="space-y-4">
@@ -259,55 +167,43 @@ export default function RagTeachingAssistantPage() {
                   </h2>
                 </div>
                 <p className="font-sans text-base sm:text-lg text-[#c4c7c9] leading-relaxed">
-                  The RAG-Based AI Teaching Assistant is an end-to-end intelligent pedagogical copilot created to eliminate friction in video-based coursework. By transforming recorded lectures and seminar footage into queryable semantic knowledge graphs, students can ask precise conceptual questions and receive grounded, hallucination-free explanations accompanied by exact video timestamps.
+                  The RAG-Based AI Teaching Assistant is a Retrieval-Augmented Generation system built to answer questions from video-based learning content. It transforms recorded lecture videos into a queryable knowledge base, enabling students to ask precise conceptual questions and receive grounded, context-aware responses that reduce hallucinations through semantic retrieval rather than generative guessing.
                 </p>
 
-                {/* Pipeline Reversing Logic Diagram */}
+                {/* Pipeline Overview */}
                 <div className="p-6 rounded-2xl bg-[#1b1c1e] border border-[#444749]/30 flex flex-col gap-4 my-4">
                   <div className="flex items-center justify-between flex-wrap gap-2">
                     <span className="font-label text-xs text-[#8e9193] uppercase tracking-wider font-semibold">
-                      // PIPELINE REVERSING LOGIC
+                      // END-TO-END PIPELINE
                     </span>
                     <span className="font-label text-xs text-[#f7bd55]">
-                      AUDIO -&gt; VECTOR GRAPH
+                      VIDEO &rarr; ANSWER
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                  <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-1">
                     <div className="p-4 rounded-xl bg-[#121315] border border-[#444749]/30 flex flex-col gap-1.5">
-                      <span className="font-label text-xs text-[#f7bd55] uppercase font-semibold">
-                        Ingestion
-                      </span>
-                      <span className="font-sans text-sm text-[#ffffff] font-medium">
-                        FFmpeg Extraction
-                      </span>
-                      <span className="font-sans text-xs text-[#c4c7c9] leading-normal">
-                        16kHz audio stream slicing &amp; Whisper transcribing
-                      </span>
+                      <span className="font-label text-xs text-[#f7bd55] uppercase font-semibold">Transcription</span>
+                      <span className="font-sans text-sm text-[#ffffff] font-medium">Video-to-Text</span>
+                      <span className="font-sans text-xs text-[#c4c7c9] leading-normal">FFmpeg audio extraction &amp; speech-to-text processing</span>
                     </div>
 
                     <div className="p-4 rounded-xl bg-[#121315] border border-[#444749]/30 flex flex-col gap-1.5">
-                      <span className="font-label text-xs text-[#f7bd55] uppercase font-semibold">
-                        Chunking
-                      </span>
-                      <span className="font-sans text-sm text-[#ffffff] font-medium">
-                        Timestamp Anchoring
-                      </span>
-                      <span className="font-sans text-xs text-[#c4c7c9] leading-normal">
-                        Overlapping 30s dense semantic embeddings
-                      </span>
+                      <span className="font-label text-xs text-[#f7bd55] uppercase font-semibold">Embedding</span>
+                      <span className="font-sans text-sm text-[#ffffff] font-medium">Vector Generation</span>
+                      <span className="font-sans text-xs text-[#c4c7c9] leading-normal">Timestamped content converted to dense embeddings</span>
                     </div>
 
                     <div className="p-4 rounded-xl bg-[#121315] border border-[#444749]/30 flex flex-col gap-1.5">
-                      <span className="font-label text-xs text-[#f7bd55] uppercase font-semibold">
-                        Inference
-                      </span>
-                      <span className="font-sans text-sm text-[#ffffff] font-medium">
-                        RRF Fusion
-                      </span>
-                      <span className="font-sans text-xs text-[#c4c7c9] leading-normal">
-                        Reciprocal rank cross-encoder response synthesis
-                      </span>
+                      <span className="font-label text-xs text-[#f7bd55] uppercase font-semibold">Storage</span>
+                      <span className="font-sans text-sm text-[#ffffff] font-medium">Vector Store</span>
+                      <span className="font-sans text-xs text-[#c4c7c9] leading-normal">Indexed vector storage for fast similarity lookup</span>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-[#121315] border border-[#444749]/30 flex flex-col gap-1.5">
+                      <span className="font-label text-xs text-[#f7bd55] uppercase font-semibold">Retrieval</span>
+                      <span className="font-sans text-sm text-[#ffffff] font-medium">Semantic Search</span>
+                      <span className="font-sans text-xs text-[#c4c7c9] leading-normal">Context-aware retrieval to ground responses</span>
                     </div>
                   </div>
                 </div>
@@ -324,7 +220,7 @@ export default function RagTeachingAssistantPage() {
                   </h2>
                 </div>
                 <p className="font-sans text-base sm:text-lg text-[#c4c7c9] leading-relaxed">
-                  The underlying pipeline integrates FFmpeg audio demuxing and Whisper automatic transcription, chunking timestamped content into dense vector representations. Queries are evaluated through high-dimensional vector embeddings and reciprocal rank fusion, fetching the most contextually relevant lecture segments to formulate verified responses.
+                  The pipeline begins with FFmpeg extracting audio from lecture video files, which is then passed through a speech-to-text transcription stage to produce timestamped text. Those transcripts are converted into vector embeddings stored in a vector index. When a student submits a query, the system searches this store to surface the most contextually relevant lecture segments, grounding its response in the actual source material.
                 </p>
               </div>
 
@@ -339,55 +235,11 @@ export default function RagTeachingAssistantPage() {
                   </h2>
                 </div>
                 <p className="font-sans text-base sm:text-lg text-[#c4c7c9] leading-relaxed">
-                  Built using Python and Streamlit with modular vector store connectors, the application offers an intuitive conversational UI with interactive timestamp bookmarks and citation source references, bridging complex LLM retrieval logic with an effortless student learning workflow.
+                  Built with Python and Streamlit, the application provides a conversational interface where students can ask questions about lecture content and receive answers grounded in retrieved transcript segments. By anchoring responses to semantically retrieved context, the system improves response relevance and reduces hallucinations compared to ungrounded generative approaches.
                 </p>
               </div>
 
-              {/* Tech Stack & Methodologies */}
-              <div className="pt-4 flex flex-col gap-4 border-t border-[#444749]/30">
-                <span className="font-section-marker text-xs text-[#8e9193] tracking-wider uppercase font-semibold">
-                  // TECH STACK &amp; METHODOLOGIES
-                </span>
-                <div className="flex flex-wrap gap-2.5">
-                  {[
-                    "Python",
-                    "Streamlit",
-                    "FFmpeg",
-                    "Vector Embeddings",
-                    "RAG Pipeline",
-                    "Semantic Retrieval",
-                    "Whisper ASR",
-                    "LangChain",
-                  ].map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3.5 py-2 rounded-lg bg-[#1b1c1e] font-label text-xs text-[#e3e2e5] hover:text-[#ffffff] hover:border-[#f7bd55]/50 border border-[#444749]/30 transition-colors cursor-default flex items-center gap-2"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#f7bd55]" />
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
 
-              {/* Action Buttons */}
-              <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                <a
-                  href="https://github.com/Arykashid/RAG---Based-AI-Assistant"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3.5 rounded-xl bg-[#ffffff] text-[#121315] font-sans text-sm font-semibold hover:bg-[#f7bd55] transition-colors inline-flex items-center justify-center gap-2 shadow-lg min-h-[44px]"
-                >
-                  <Terminal size={17} />
-                  <span>View Repository</span>
-                  <ArrowUpRight size={15} />
-                </a>
-
-                <div className="px-5 py-3 rounded-xl bg-[#1b1c1e] border border-[#444749]/30 flex items-center justify-center gap-2 font-label text-xs text-[#c4c7c9]">
-                  <span className="w-2 h-2 rounded-full bg-[#f7bd55]" />
-                  <span>STANDALONE DEMO AVAILABLE IN REPO DOCKERFILE</span>
-                </div>
-              </div>
             </div>
           </div>
 

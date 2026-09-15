@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -8,16 +8,77 @@ import {
   ArrowRight,
   ArrowUpRight,
   Terminal,
-  Activity,
+  ChevronLeft,
+  ChevronRight,
+  ShieldCheck,
   CheckCircle2,
-  Cpu,
-  Server,
-  Layers,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+const slides = [
+  {
+    id: 1,
+    title: "Dashboard (ESCALATE state)",
+    category: "AUTONOMOUS RESPONSE",
+    src: "/images/crashguard-dashboard.png",
+    alt: "CrashGuard AI Dashboard showing ESCALATE state and active server node alert",
+    caption:
+      "Dashboard (ESCALATE state) — Real-time telemetry monitoring server load with autonomous escalation triggered upon predicted SLA breach risk.",
+  },
+  {
+    id: 2,
+    title: "Systems (5-server fleet overview)",
+    category: "FLEET TELEMETRY",
+    src: "/images/crashguard-systems.png",
+    alt: "CrashGuard AI Systems view showing 5-server fleet status and CPU usage",
+    caption:
+      "Systems (5-server fleet overview) — Continuous fleet telemetry across 5 monitored nodes tracking real-time CPU usage, trend vectors, and autonomous operational decisions.",
+  },
+  {
+    id: 3,
+    title: "Models (calibration metrics)",
+    category: "SAFETY GATING",
+    src: "/images/crashguard-models.png",
+    alt: "CrashGuard AI Models calibration proof and degraded trust mode",
+    caption:
+      "The system continuously validates its own calibration — when prediction divergence exceeds safe thresholds, it autonomously gates decisions to a safer monitoring mode rather than continuing to act on unreliable predictions.",
+  },
+  {
+    id: 4,
+    title: "Predictions (per-server predictions with recommended actions)",
+    category: "PER-SERVER FORECASTS",
+    src: "/images/crashguard-predictions.png",
+    alt: "CrashGuard AI Predictions screen with per-server risk forecasts and recommended actions",
+    caption:
+      "Predictions (per-server predictions with recommended actions) — Granular per-server forecasts with 5-minute operational risk assessment, decision gating, and automated intervention actions.",
+  },
+];
+
 export default function CrashGuardAIPage() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const nextSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  }, []);
+
+  const prevSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  }, []);
+
+  // Keyboard navigation support
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        prevSlide();
+      } else if (e.key === "ArrowRight") {
+        nextSlide();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [nextSlide, prevSlide]);
+
   return (
     <div className="min-h-screen bg-[#121315] text-[#e3e2e5] flex flex-col">
       <Navbar />
@@ -62,45 +123,94 @@ export default function CrashGuardAIPage() {
             </div>
           </div>
 
-          {/* Large Interface Viewport / Screenshot Frame */}
-          <div className="relative w-full rounded-2xl bg-[#1b1c1e] overflow-hidden shadow-2xl border border-[#444749]/30 group">
-            <div className="w-full aspect-[16/9] relative">
-              <Image
-                src="/images/crashguard-ai.png"
-                alt="CrashGuard AI Telemetry Dashboard"
-                fill
-                priority
-                sizes="(max-width: 1200px) 100vw, 1320px"
-                className="object-cover object-top"
-              />
+          {/* 4-Slide Interactive Screenshot Carousel */}
+          <figure className="w-full flex flex-col gap-4">
+            {/* Quick-select Tab Strip */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+              {slides.map((slide, idx) => {
+                const isActive = idx === currentSlide;
+                return (
+                  <button
+                    key={slide.id}
+                    onClick={() => setCurrentSlide(idx)}
+                    className={`px-3.5 py-2.5 rounded-xl text-xs font-label whitespace-nowrap transition-all flex items-center gap-2 border min-h-[44px] ${
+                      isActive
+                        ? "bg-[#292a2c] text-[#f7bd55] border-[#f7bd55]/50 shadow-md font-semibold"
+                        : "bg-[#1b1c1e] text-[#8e9193] border-[#444749]/30 hover:text-[#ffffff] hover:border-[#444749]"
+                    }`}
+                  >
+                    <span className={isActive ? "text-[#f7bd55]" : "text-[#8e9193]"}>
+                      0{idx + 1}
+                    </span>
+                    <span>{slide.title.split(" (")[0]}</span>
+                  </button>
+                );
+              })}
+            </div>
 
-              {/* HUD Telemetry Overlays */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0d0e10]/90 via-transparent to-transparent pointer-events-none" />
-
-              <div className="absolute top-4 left-4 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#0d0e10]/90 backdrop-blur-md border border-[#444749]/40">
-                <Server size={14} className="text-[#00daf3]" />
-                <span className="font-section-marker text-xs text-[#00daf3]">
-                  // NODE: PROMETHEUS_CLUSTER_09
-                </span>
+            {/* Carousel Frame */}
+            <div className="relative w-full rounded-2xl bg-[#1b1c1e] overflow-hidden shadow-2xl border border-[#444749]/30 group">
+              {/* Active Image */}
+              <div className="relative w-full bg-[#0d0e10]">
+                <Image
+                  src={slides[currentSlide].src}
+                  alt={slides[currentSlide].alt}
+                  width={1920}
+                  height={912}
+                  priority
+                  unoptimized
+                  className="w-full h-auto object-contain block select-none"
+                  style={{
+                    imageRendering: "-webkit-optimize-contrast",
+                  }}
+                />
               </div>
 
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between flex-wrap gap-2 pointer-events-none">
-                <div className="px-3 py-1.5 rounded-lg bg-[#0d0e10]/90 backdrop-blur-md border border-[#444749]/40 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#f7bd55] animate-ping" />
-                  <span className="font-label text-xs text-[#f7bd55]">
-                    TELEMETRY_ENGINE_V5.STATE // ACTIVE
+              {/* Left Arrow Button */}
+              <button
+                type="button"
+                onClick={prevSlide}
+                aria-label="Previous slide"
+                className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#121315]/90 hover:bg-[#121315] text-[#ffffff] hover:text-[#f7bd55] border border-[#444749]/50 hover:border-[#f7bd55]/60 flex items-center justify-center transition-colors shadow-xl z-10"
+              >
+                <ChevronLeft size={22} />
+              </button>
+
+              {/* Right Arrow Button */}
+              <button
+                type="button"
+                onClick={nextSlide}
+                aria-label="Next slide"
+                className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#121315]/90 hover:bg-[#121315] text-[#ffffff] hover:text-[#f7bd55] border border-[#444749]/50 hover:border-[#f7bd55]/60 flex items-center justify-center transition-colors shadow-xl z-10"
+              >
+                <ChevronRight size={22} />
+              </button>
+            </div>
+
+            {/* Dynamic Figcaption */}
+            <figcaption className="p-4 sm:p-5 rounded-xl bg-[#1b1c1e] border border-[#444749]/30 flex items-start gap-3.5 text-xs sm:text-sm text-[#c4c7c9] leading-relaxed shadow-md">
+              <div className="mt-0.5 p-1 rounded-md bg-[#292a2c] text-[#f7bd55] shrink-0">
+                <ShieldCheck size={18} />
+              </div>
+              <div className="space-y-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-label text-xs uppercase tracking-wider text-[#f7bd55] font-semibold">
+                    {slides[currentSlide].title}
+                  </span>
+                  <span className="text-[#8e9193] text-xs font-section-marker">
+                    // SLIDE 0{currentSlide + 1} OF 0{slides.length}
                   </span>
                 </div>
-                <div className="px-3 py-1.5 rounded-lg bg-[#0d0e10]/90 backdrop-blur-md border border-[#444749]/40 font-label text-xs text-[#c4c7c9]">
-                  RMSE // 0.1337 | LOOKAHEAD // 15M
-                </div>
+                <p className="text-[#e3e2e5]">
+                  {slides[currentSlide].caption}
+                </p>
               </div>
-            </div>
-          </div>
+            </figcaption>
+          </figure>
 
           {/* Deep Architectural Breakdown */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
-            {/* Left Column: Narrative & Inference Telemetry Kernel */}
+            {/* Left Column: Narrative & Benchmarks */}
             <div className="lg:col-span-8 flex flex-col gap-8">
               <div className="flex items-center gap-2">
                 <span className="font-section-marker text-sm text-[#f7bd55] font-semibold">
@@ -113,61 +223,98 @@ export default function CrashGuardAIPage() {
 
               <div className="space-y-5 text-base sm:text-lg leading-relaxed text-[#c4c7c9]">
                 <p className="text-[#ffffff] font-medium">
-                  CrashGuard AI is an autonomous infrastructure failure-prevention system engineered to anticipate compute spikes and node degradation before they impact production workloads. Built around a hybrid LSTM and XGBoost ensemble model, it processes multi-metric telemetry across CPU load, memory pressure, and I/O wait times to produce continuous 15-minute lookahead forecasts with an RMSE of 0.1337.
+                  CrashGuard AI is an autonomous infrastructure failure-prevention system engineered to anticipate compute spikes and node degradation before they impact production workloads. Built around a hybrid LSTM and XGBoost ensemble model, it processes 15 engineered temporal features from ~60,000 Google Cluster CPU records to achieve a 60% CPU spike prediction accuracy, a forecast RMSE of 0.1337, and a Diebold-Mariano (DM) test p-value of 0.0086 demonstrating statistically significant predictive superiority over baseline models.
                 </p>
                 <p>
-                  At the core of CrashGuard AI is a state-driven Decision Engine (v5) equipped with hysteresis boundaries and dynamic confidence gating. Rather than relying on static threshold alerts that induce alert fatigue, the engine evaluates confidence-weighted risk trajectories, proactively orchestrating cluster node mitigation and preemptive auto-scaling actions while suppressing false-positive flapping.
+                  At the core of CrashGuard AI is a state-driven Decision Engine (v5) equipped with hysteresis boundaries and dynamic confidence gating. Rather than relying on static threshold alerts that induce alert fatigue, the engine evaluates confidence-weighted risk trajectories, proactively orchestrating cluster node mitigation and preemptive auto-scaling actions while suppressing false-positive flapping. A hard override triggers at CPU &ge; 90% to guarantee immediate fail-safe escalation.
                 </p>
                 <p>
-                  Packaged within containerized microservices utilizing Docker and Flask APIs, the architecture integrates directly with Prometheus monitoring pipelines. It demonstrates that predictive machine intelligence coupled with rigorous finite state machines can eliminate reactive outage fire drills in modern high-throughput cloud environments.
+                  Packaged within containerized microservices utilizing Docker and Flask APIs, the architecture demonstrates that predictive machine intelligence coupled with rigorous finite state machines can eliminate reactive outage fire drills in modern high-throughput cloud environments.
                 </p>
               </div>
 
-              {/* Inference Telemetry Kernel Chart */}
-              <div className="p-6 rounded-2xl bg-[#1b1c1e] border border-[#444749]/30 shadow-lg flex flex-col gap-5">
+              {/* Empirical Benchmarks & Specifications Card */}
+              <div className="p-6 sm:p-7 rounded-2xl bg-[#1b1c1e] border border-[#444749]/30 shadow-lg flex flex-col gap-6">
                 <div className="flex items-center justify-between flex-wrap gap-2">
-                  <div className="flex items-center gap-2">
-                    <Activity size={16} className="text-[#f7bd55]" />
-                    <span className="font-label text-xs text-[#f7bd55] uppercase tracking-wider font-semibold">
-                      // INFERENCE TELEMETRY KERNEL
-                    </span>
-                  </div>
-                  <span className="font-label text-xs text-[#8e9193]">
-                    HISTORICAL VS PREDICTION CONE
+                  <span className="font-section-marker text-xs text-[#f7bd55] uppercase font-semibold">
+                    // EMPIRICAL BENCHMARKS &amp; SPECIFICATIONS
+                  </span>
+                  <span className="font-label text-xs text-[#8e9193] uppercase">
+                    Validated Performance &amp; State Engine Rules
                   </span>
                 </div>
 
-                {/* Histogram Bars */}
-                <div className="w-full h-28 flex items-end gap-1.5 pt-4 overflow-hidden border-b border-[#444749]/30 pb-2">
-                  <div className="flex-1 bg-[#343537] h-[32%] rounded-t-sm" title="T-45: 32%" />
-                  <div className="flex-1 bg-[#343537] h-[45%] rounded-t-sm" title="T-40: 45%" />
-                  <div className="flex-1 bg-[#343537] h-[38%] rounded-t-sm" title="T-35: 38%" />
-                  <div className="flex-1 bg-[#343537] h-[56%] rounded-t-sm" title="T-30: 56%" />
-                  <div className="flex-1 bg-[#343537] h-[48%] rounded-t-sm" title="T-25: 48%" />
-                  <div className="flex-1 bg-[#343537] h-[64%] rounded-t-sm" title="T-20: 64%" />
-                  <div className="flex-1 bg-[#343537] h-[72%] rounded-t-sm" title="T-15: 72%" />
-                  <div className="flex-1 bg-[#f7bd55]/40 h-[78%] rounded-t-sm" title="T-10: 78%" />
-                  <div className="flex-1 bg-[#f7bd55]/60 h-[86%] rounded-t-sm" title="T-5: 86%" />
-                  <div className="flex-1 bg-[#f7bd55] h-[94%] rounded-t-sm relative" title="T-0: PEAK 94%">
-                    <span className="absolute -top-5 left-1/2 -translate-x-1/2 font-label text-[9px] text-[#f7bd55] font-bold">
-                      PEAK
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="p-4 rounded-xl bg-[#121315] border border-[#444749]/20 flex flex-col gap-1">
+                    <span className="font-label text-[11px] text-[#8e9193] uppercase">
+                      Spike Prediction Accuracy
+                    </span>
+                    <span className="font-section-marker text-2xl text-[#ffffff] font-semibold">
+                      60%
+                    </span>
+                    <span className="font-sans text-xs text-[#8e9193]">
+                      Anticipating critical CPU spikes
                     </span>
                   </div>
-                  <div className="flex-1 bg-[#00daf3]/80 h-[82%] rounded-t-sm" title="T+5: 82% (Mitigation)" />
-                  <div className="flex-1 bg-[#00daf3]/60 h-[68%] rounded-t-sm" title="T+10: 68%" />
-                  <div className="flex-1 bg-[#343537] h-[54%] rounded-t-sm" title="T+15: 54%" />
-                  <div className="flex-1 bg-[#343537] h-[42%] rounded-t-sm" title="T+20: 42%" />
+
+                  <div className="p-4 rounded-xl bg-[#121315] border border-[#444749]/20 flex flex-col gap-1">
+                    <span className="font-label text-[11px] text-[#8e9193] uppercase">
+                      Forecast RMSE
+                    </span>
+                    <span className="font-section-marker text-2xl text-[#f7bd55] font-semibold">
+                      0.1337
+                    </span>
+                    <span className="font-sans text-xs text-[#8e9193]">
+                      LSTM + XGBoost ensemble
+                    </span>
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-[#121315] border border-[#444749]/20 flex flex-col gap-1">
+                    <span className="font-label text-[11px] text-[#8e9193] uppercase">
+                      Diebold-Mariano Test
+                    </span>
+                    <span className="font-section-marker text-2xl text-[#00daf3] font-semibold">
+                      p = 0.0086
+                    </span>
+                    <span className="font-sans text-xs text-[#8e9193]">
+                      Statistically significant superiority
+                    </span>
+                  </div>
                 </div>
 
-                <div className="flex items-center justify-between font-label text-[11px] text-[#8e9193] pt-1">
-                  <span>T-45 MIN</span>
-                  <span className="text-[#f7bd55] font-medium">T-0 (DETECTION TRIGGER)</span>
-                  <span className="text-[#00daf3] font-medium">T+15 MIN (MITIGATED)</span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-[#444749]/30">
+                  <div className="p-3.5 rounded-xl bg-[#121315]/70 border border-[#444749]/20 flex items-start gap-3">
+                    <div className="mt-0.5 text-[#f7bd55] shrink-0">
+                      <CheckCircle2 size={16} />
+                    </div>
+                    <div className="flex flex-col gap-0.5">
+                      <span className="font-label text-xs text-[#ffffff] font-medium">
+                        Training &amp; Feature Engineering
+                      </span>
+                      <span className="font-sans text-xs text-[#c4c7c9] leading-relaxed">
+                        15 temporal features extracted from ~60,000 Google Cluster CPU records.
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-3.5 rounded-xl bg-[#121315]/70 border border-[#444749]/20 flex items-start gap-3">
+                    <div className="mt-0.5 text-[#f7bd55] shrink-0">
+                      <CheckCircle2 size={16} />
+                    </div>
+                    <div className="flex flex-col gap-0.5">
+                      <span className="font-label text-xs text-[#ffffff] font-medium">
+                        Decision Engine v5 Governance
+                      </span>
+                      <span className="font-sans text-xs text-[#c4c7c9] leading-relaxed">
+                        Hysteresis boundaries and confidence gating with hard override at CPU &ge; 90%.
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Column: Tech Stack, Metrics & Repo Actions */}
+            {/* Right Column: Tech Stack & Repo Actions */}
             <div className="lg:col-span-4 flex flex-col gap-6">
               {/* Tech Stack Box */}
               <div className="p-6 sm:p-7 rounded-2xl bg-[#1b1c1e] border border-[#444749]/30 shadow-lg flex flex-col gap-6">
@@ -188,7 +335,6 @@ export default function CrashGuardAIPage() {
                     "Flask",
                     "Docker",
                     "Time-Series Forecasting",
-                    "Prometheus Telemetry",
                     "Confidence-Gated Escalation",
                   ].map((tech) => (
                     <span
@@ -198,28 +344,6 @@ export default function CrashGuardAIPage() {
                       {tech}
                     </span>
                   ))}
-                </div>
-
-                {/* Telemetry Key Figures */}
-                <div className="flex flex-col gap-2.5 pt-2 border-t border-[#444749]/30">
-                  <div className="flex items-center justify-between py-2.5 px-3 rounded-lg bg-[#121315] border border-[#444749]/20">
-                    <span className="font-label text-xs text-[#c4c7c9]">MODEL ACCURACY</span>
-                    <span className="font-section-marker text-sm text-[#ffffff] font-semibold">
-                      99.14%
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between py-2.5 px-3 rounded-lg bg-[#121315] border border-[#444749]/20">
-                    <span className="font-label text-xs text-[#c4c7c9]">LATENCY OVERHEAD</span>
-                    <span className="font-section-marker text-sm text-[#00daf3] font-semibold">
-                      &lt; 14ms
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between py-2.5 px-3 rounded-lg bg-[#121315] border border-[#444749]/20">
-                    <span className="font-label text-xs text-[#c4c7c9]">DECISION HORIZON</span>
-                    <span className="font-section-marker text-sm text-[#f7bd55] font-semibold">
-                      15-Min Proactive
-                    </span>
-                  </div>
                 </div>
               </div>
 
