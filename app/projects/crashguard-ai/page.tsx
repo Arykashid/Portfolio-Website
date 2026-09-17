@@ -126,14 +126,14 @@ export default function CrashGuardAIPage() {
           {/* 4-Slide Interactive Screenshot Carousel */}
           <figure className="w-full flex flex-col gap-4">
             {/* Quick-select Tab Strip */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+            <div className="w-full max-w-full min-w-0 flex items-center gap-2 overflow-x-auto pb-1.5 scrollbar-none overscroll-x-contain">
               {slides.map((slide, idx) => {
                 const isActive = idx === currentSlide;
                 return (
                   <button
                     key={slide.id}
                     onClick={() => setCurrentSlide(idx)}
-                    className={`px-3.5 py-2.5 rounded-xl text-xs font-label whitespace-nowrap transition-all flex items-center gap-2 border min-h-[44px] ${
+                    className={`shrink-0 px-3.5 py-2.5 rounded-xl text-xs font-label whitespace-nowrap transition-all flex items-center gap-2 border min-h-[44px] ${
                       isActive
                         ? "bg-[#292a2c] text-[#f7bd55] border-[#f7bd55]/50 shadow-md font-semibold"
                         : "bg-[#1b1c1e] text-[#8e9193] border-[#444749]/30 hover:text-[#ffffff] hover:border-[#444749]"
@@ -171,9 +171,9 @@ export default function CrashGuardAIPage() {
                 type="button"
                 onClick={prevSlide}
                 aria-label="Previous slide"
-                className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#121315]/90 hover:bg-[#121315] text-[#ffffff] hover:text-[#f7bd55] border border-[#444749]/50 hover:border-[#f7bd55]/60 flex items-center justify-center transition-colors shadow-xl z-10"
+                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-[#121315]/90 hover:bg-[#121315] text-[#ffffff] hover:text-[#f7bd55] border border-[#444749]/50 hover:border-[#f7bd55]/60 flex items-center justify-center transition-colors shadow-xl z-10"
               >
-                <ChevronLeft size={22} />
+                <ChevronLeft className="w-4 h-4 sm:w-[22px] sm:h-[22px]" />
               </button>
 
               {/* Right Arrow Button */}
@@ -181,9 +181,9 @@ export default function CrashGuardAIPage() {
                 type="button"
                 onClick={nextSlide}
                 aria-label="Next slide"
-                className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#121315]/90 hover:bg-[#121315] text-[#ffffff] hover:text-[#f7bd55] border border-[#444749]/50 hover:border-[#f7bd55]/60 flex items-center justify-center transition-colors shadow-xl z-10"
+                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-[#121315]/90 hover:bg-[#121315] text-[#ffffff] hover:text-[#f7bd55] border border-[#444749]/50 hover:border-[#f7bd55]/60 flex items-center justify-center transition-colors shadow-xl z-10"
               >
-                <ChevronRight size={22} />
+                <ChevronRight className="w-4 h-4 sm:w-[22px] sm:h-[22px]" />
               </button>
             </div>
 

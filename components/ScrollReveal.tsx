@@ -76,7 +76,7 @@ export default function ScrollReveal({
     <div
       ref={domRef}
       id={id}
-      className={`scroll-reveal ${isVisible ? "is-visible" : ""} ${className}`}
+      className={`scroll-reveal scroll-mt-20 ${isVisible ? "is-visible" : ""} ${className}`}
     >
       {children}
     </div>

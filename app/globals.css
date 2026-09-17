@@ -30,7 +30,12 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
     color-scheme: dark;
+  }
+
+  [id] {
+    scroll-margin-top: 5rem;
   }
 
   body {
@@ -192,3 +197,13 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #444749;
 }
+
+/* Visually hide scrollbar while preserving scroll functionality */
+.scrollbar-none {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
