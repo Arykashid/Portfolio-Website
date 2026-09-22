@@ -1,14 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { Mail, Check, Copy, FileText, ArrowUpRight, ArrowUp, Send, Download } from "lucide-react";
+import { Mail, Check, Copy, ArrowUpRight, ArrowUp, Send } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
-interface ContactSectionProps {
-  onResumeClick?: () => void;
-}
-
-export default function ContactSection({ onResumeClick }: ContactSectionProps) {
+export default function ContactSection() {
   const [copied, setCopied] = useState(false);
   const email = "arykashidofficial@gmail.com";
 
@@ -90,27 +86,6 @@ export default function ContactSection({ onResumeClick }: ContactSectionProps) {
               <span>Open Mail Client</span>
               <Send size={15} />
             </a>
-
-            {/* Download Resume Button */}
-            <a
-              href="/resume.pdf"
-              download="Ary_Kashid_Resume.pdf"
-              className="px-5 py-3 rounded-lg bg-[#292a2c] text-[#f4f4f5] font-sans text-xs sm:text-sm font-medium hover:bg-[#38393b] hover:text-[#ffffff] transition-colors inline-flex items-center justify-center gap-2 border border-[#444749]/40 min-h-[44px]"
-            >
-              <Download size={15} className="text-[#f7bd55]" />
-              <span>Download Resume</span>
-            </a>
-
-            {onResumeClick && (
-              <button
-                type="button"
-                onClick={onResumeClick}
-                className="px-4 py-3 rounded-lg bg-transparent text-[#c4c7c9] hover:text-[#ffffff] hover:bg-[#292a2c]/60 font-sans text-xs sm:text-sm font-medium transition-colors inline-flex items-center justify-center gap-2 min-h-[44px]"
-              >
-                <FileText size={15} />
-                <span>Preview CV</span>
-              </button>
-            )}
           </div>
 
           {/* Footer Metadata in Contact Box */}

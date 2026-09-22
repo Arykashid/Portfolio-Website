@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -8,16 +8,67 @@ import {
   ArrowRight,
   ArrowUpRight,
   Terminal,
+  ChevronLeft,
+  ChevronRight,
+  Sparkles,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+const slides = [
+  {
+    id: 1,
+    title: "Interface (Query & Parameter Controls)",
+    category: "SEMANTIC QUERY",
+    src: "/images/rag-teaching-assistant.png",
+    width: 1568,
+    height: 672,
+    alt: "RAG-Based AI Teaching Assistant Interface demoed on SQL coursework",
+    caption:
+      "Query & Settings Interface — Model selection, chunk retrieval configuration, and query interface demoed on SQL coursework as \"RAG based SQL Assistant.\"",
+  },
+  {
+    id: 2,
+    title: "Timestamp-Aware Retrieval & Video Sync",
+    category: "TIMESTAMP CITATIONS",
+    src: "/images/rag-teaching-assistant-2.png",
+    width: 1024,
+    height: 572,
+    alt: "RAG-Based AI Teaching Assistant timestamp-aware retrieval with direct YouTube lecture links",
+    caption:
+      "Timestamp-Aware Retrieval & Video Sync — Grounded answer generation with timestamp-specific links mapping directly into corresponding YouTube video lecture segments.",
+  },
+];
+
 export default function RagTeachingAssistantPage() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const nextSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  }, []);
+
+  const prevSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  }, []);
+
+  // Keyboard navigation support
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        prevSlide();
+      } else if (e.key === "ArrowRight") {
+        nextSlide();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [nextSlide, prevSlide]);
+
   return (
     <div className="min-h-screen bg-[#121315] text-[#e3e2e5] flex flex-col">
       <Navbar />
 
-      <main className="w-full pt-28 pb-16 flex-1">
+      <main className="w-full pt-32 pb-16 flex-1">
         <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-16 flex flex-col gap-12 sm:gap-16">
           {/* Top Breadcrumb & Metadata Bar */}
           <div className="flex flex-col gap-6">
@@ -67,21 +118,88 @@ export default function RagTeachingAssistantPage() {
             </div>
           </div>
 
-          {/* Interface Screenshot — static, not interactive */}
-          <figure className="w-full flex flex-col gap-3">
-            <div className="relative w-full rounded-2xl bg-[#1b1c1e] overflow-hidden shadow-2xl border border-[#444749]/30">
-              <Image
-                src="/images/rag-teaching-assistant.png"
-                alt="RAG-Based AI Teaching Assistant Interface"
-                width={1568}
-                height={672}
-                priority
-                unoptimized
-                className="w-full h-auto object-contain block"
-              />
+          {/* 2-Slide Interactive Screenshot Carousel */}
+          <figure className="w-full flex flex-col gap-4">
+            {/* Quick-select Tab Strip */}
+            <div className="w-full max-w-full min-w-0 flex items-center gap-2 overflow-x-auto pb-1.5 scrollbar-none overscroll-x-contain">
+              {slides.map((slide, idx) => {
+                const isActive = idx === currentSlide;
+                return (
+                  <button
+                    key={slide.id}
+                    onClick={() => setCurrentSlide(idx)}
+                    className={`shrink-0 px-3.5 py-2.5 rounded-xl text-xs font-label whitespace-nowrap transition-all flex items-center gap-2 border min-h-[44px] ${
+                      isActive
+                        ? "bg-[#292a2c] text-[#f7bd55] border-[#f7bd55]/50 shadow-md font-semibold"
+                        : "bg-[#1b1c1e] text-[#8e9193] border-[#444749]/30 hover:text-[#ffffff] hover:border-[#444749]"
+                    }`}
+                  >
+                    <span className={isActive ? "text-[#f7bd55]" : "text-[#8e9193]"}>
+                      0{idx + 1}
+                    </span>
+                    <span>{slide.title.split(" (")[0]}</span>
+                  </button>
+                );
+              })}
             </div>
-            <figcaption className="text-xs sm:text-sm text-[#8e9193] font-sans">
-              <span className="text-[#ffffff] font-medium">RAG-Based AI Teaching Assistant</span> — Demoed here on a SQL course dataset as &ldquo;RAG based SQL Assistant.&rdquo;
+
+            {/* Carousel Frame */}
+            <div className="relative w-full rounded-2xl bg-[#1b1c1e] overflow-hidden shadow-2xl border border-[#444749]/30 group">
+              {/* Active Image */}
+              <div className="relative w-full bg-[#0d0e10]">
+                <Image
+                  src={slides[currentSlide].src}
+                  alt={slides[currentSlide].alt}
+                  width={slides[currentSlide].width}
+                  height={slides[currentSlide].height}
+                  priority
+                  unoptimized
+                  className="w-full h-auto object-contain block select-none"
+                  style={{
+                    imageRendering: "-webkit-optimize-contrast",
+                  }}
+                />
+              </div>
+
+              {/* Left Arrow Button */}
+              <button
+                type="button"
+                onClick={prevSlide}
+                aria-label="Previous slide"
+                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-[#121315]/90 hover:bg-[#121315] text-[#ffffff] hover:text-[#f7bd55] border border-[#444749]/50 hover:border-[#f7bd55]/60 flex items-center justify-center transition-colors shadow-xl z-10"
+              >
+                <ChevronLeft className="w-4 h-4 sm:w-[22px] sm:h-[22px]" />
+              </button>
+
+              {/* Right Arrow Button */}
+              <button
+                type="button"
+                onClick={nextSlide}
+                aria-label="Next slide"
+                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-[#121315]/90 hover:bg-[#121315] text-[#ffffff] hover:text-[#f7bd55] border border-[#444749]/50 hover:border-[#f7bd55]/60 flex items-center justify-center transition-colors shadow-xl z-10"
+              >
+                <ChevronRight className="w-4 h-4 sm:w-[22px] sm:h-[22px]" />
+              </button>
+            </div>
+
+            {/* Dynamic Figcaption */}
+            <figcaption className="p-4 sm:p-5 rounded-xl bg-[#1b1c1e] border border-[#444749]/30 flex items-start gap-3.5 text-xs sm:text-sm text-[#c4c7c9] leading-relaxed shadow-md">
+              <div className="mt-0.5 p-1 rounded-md bg-[#292a2c] text-[#f7bd55] shrink-0">
+                <Sparkles size={18} />
+              </div>
+              <div className="space-y-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-label text-xs uppercase tracking-wider text-[#f7bd55] font-semibold">
+                    {slides[currentSlide].title}
+                  </span>
+                  <span className="text-[#8e9193] text-xs font-section-marker">
+                    // SLIDE 0{currentSlide + 1} OF 0{slides.length}
+                  </span>
+                </div>
+                <p className="text-[#e3e2e5]">
+                  {slides[currentSlide].caption}
+                </p>
+              </div>
             </figcaption>
           </figure>
 

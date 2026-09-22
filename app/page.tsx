@@ -37,7 +37,7 @@ export default function Home() {
         <AchievementsSection />
 
         {/* 6. Contact Section (Non-oversized, copyable email) */}
-        <ContactSection onResumeClick={() => setIsResumeOpen(true)} />
+        <ContactSection />
       </main>
 
       {/* Footer */}

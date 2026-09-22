@@ -23,6 +23,7 @@ const mlMethodsSkills: SkillItem[] = [
   { name: "Ensemble Modeling" },
   { name: "Retrieval-Augmented Generation" },
   { name: "Feature Engineering" },
+  { name: "A/B Testing" },
   { name: "Hysteresis State Machines" },
 ];
 
@@ -40,18 +41,15 @@ const engineeringSkills: SkillItem[] = [
 interface MarqueeRowProps {
   label: string;
   skills: SkillItem[];
-  durationSec?: number;
-  reverse?: boolean;
+  direction?: "left" | "right";
 }
 
 function MarqueeRow({
   label,
   skills,
-  durationSec = 28,
-  reverse = false,
+  direction = "left",
 }: MarqueeRowProps) {
-  // We duplicate the list twice so that translating from 0 to -50% produces a perfectly seamless loop
-  const repeatedSkills = [...skills, ...skills];
+  const rowAnimClass = direction === "left" ? "skills-row-left" : "skills-row-right";
 
   return (
     <div className="w-full flex flex-col gap-3 pb-6 border-b border-[#444749]/20 last:border-b-0 overflow-hidden">
@@ -63,18 +61,12 @@ function MarqueeRow({
         </h3>
       </div>
 
-      {/* Infinite Scrolling Track */}
-      <div className="marquee-container mask-marquee overflow-hidden w-full relative pt-1">
-        <div
-          className="animate-marquee flex items-center gap-3"
-          style={{
-            animationDuration: `${durationSec}s`,
-            animationDirection: reverse ? "reverse" : "normal",
-          }}
-        >
-          {repeatedSkills.map((skill, index) => (
+      {/* Subtle Marquee Scrolling Track (no clipping mask, zero duplicates) */}
+      <div className="w-full overflow-hidden relative py-1">
+        <div className={`${rowAnimClass} flex items-center gap-3`}>
+          {skills.map((skill) => (
             <div
-              key={`${skill.name}-${index}`}
+              key={skill.name}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[#1b1c1e] border border-[#444749]/30 text-[#e3e2e5] hover:border-[#f7bd55]/50 hover:text-[#ffffff] transition-colors cursor-default select-none shadow-sm whitespace-nowrap"
             >
               <span className="font-label text-xs sm:text-sm font-medium">
@@ -105,23 +97,22 @@ export default function SkillsMarquee() {
         </span>
       </div>
 
-      {/* 3 Auto-Scrolling Rows */}
+      {/* 3 Horizontal Moving Rows (Unique Skills, Opposite Directions) */}
       <div className="flex flex-col gap-6 w-full">
         <MarqueeRow
           label="01 // ML & DATA"
           skills={mlDataSkills}
-          durationSec={26}
+          direction="left"
         />
         <MarqueeRow
           label="02 // ML METHODS"
           skills={mlMethodsSkills}
-          durationSec={32}
-          reverse
+          direction="right"
         />
         <MarqueeRow
           label="03 // ENGINEERING & INFRASTRUCTURE"
           skills={engineeringSkills}
-          durationSec={28}
+          direction="left"
         />
       </div>
     </ScrollReveal>

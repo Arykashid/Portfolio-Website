@@ -83,10 +83,10 @@ export default function CrashGuardAIPage() {
     <div className="min-h-screen bg-[#121315] text-[#e3e2e5] flex flex-col">
       <Navbar />
 
-      <main className="w-full pt-28 pb-16 flex-1">
+      <main className="w-full pt-40 sm:pt-32 pb-16 flex-1">
         <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-16 flex flex-col gap-12 sm:gap-16">
           {/* Top Breadcrumb & Metadata */}
-          <div className="flex flex-col gap-6">
+          <div id="overview" className="flex flex-col gap-6 scroll-mt-28 sm:scroll-mt-24">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <Link
                 href="/#projects"
@@ -212,7 +212,7 @@ export default function CrashGuardAIPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
             {/* Left Column: Narrative & Benchmarks */}
             <div className="lg:col-span-8 flex flex-col gap-8">
-              <div className="flex items-center gap-2">
+              <div id="architecture" className="flex items-center gap-2 scroll-mt-28 sm:scroll-mt-24">
                 <span className="font-section-marker text-sm text-[#f7bd55] font-semibold">
                   // 01
                 </span>
@@ -234,7 +234,7 @@ export default function CrashGuardAIPage() {
               </div>
 
               {/* Empirical Benchmarks & Specifications Card */}
-              <div className="p-6 sm:p-7 rounded-2xl bg-[#1b1c1e] border border-[#444749]/30 shadow-lg flex flex-col gap-6">
+              <div id="benchmarks" className="p-6 sm:p-7 rounded-2xl bg-[#1b1c1e] border border-[#444749]/30 shadow-lg flex flex-col gap-6 scroll-mt-28 sm:scroll-mt-24">
                 <div className="flex items-center justify-between flex-wrap gap-2">
                   <span className="font-section-marker text-xs text-[#f7bd55] uppercase font-semibold">
                     // EMPIRICAL BENCHMARKS &amp; SPECIFICATIONS
@@ -317,7 +317,7 @@ export default function CrashGuardAIPage() {
             {/* Right Column: Tech Stack & Repo Actions */}
             <div className="lg:col-span-4 flex flex-col gap-6">
               {/* Tech Stack Box */}
-              <div className="p-6 sm:p-7 rounded-2xl bg-[#1b1c1e] border border-[#444749]/30 shadow-lg flex flex-col gap-6">
+              <div id="tech-stack" className="p-6 sm:p-7 rounded-2xl bg-[#1b1c1e] border border-[#444749]/30 shadow-lg flex flex-col gap-6 scroll-mt-28 sm:scroll-mt-24">
                 <div className="flex flex-col gap-1">
                   <span className="font-section-marker text-xs text-[#f7bd55] uppercase font-semibold">
                     // TECH STACK &amp; METHODOLOGIES

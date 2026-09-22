@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { ArrowDown, FileText, ArrowUpRight, MapPin, Download } from "lucide-react";
+import { ArrowDown, FileText, ArrowUpRight, MapPin } from "lucide-react";
 
 interface HeroSectionProps {
   onResumeClick?: () => void;
@@ -81,23 +81,14 @@ export default function HeroSection({ onResumeClick }: HeroSectionProps) {
               <ArrowDown size={16} />
             </a>
 
-            <a
-              href="/resume.pdf"
-              download="Ary_Kashid_Resume.pdf"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#1f2022] text-[#f4f4f5] font-sans text-sm font-medium hover:bg-[#292a2c] hover:text-[#ffffff] transition-colors duration-200 border border-[#444749]/40 min-h-[44px] min-w-[44px]"
-            >
-              <Download size={16} className="text-[#f7bd55]" />
-              <span>Download Resume / CV</span>
-            </a>
-
             {onResumeClick && (
               <button
                 type="button"
                 onClick={onResumeClick}
-                className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-transparent text-[#c4c7c9] hover:text-[#ffffff] hover:bg-[#1f2022]/60 font-sans text-sm font-medium transition-colors min-h-[44px]"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#1f2022] text-[#f4f4f5] font-sans text-sm font-medium hover:bg-[#292a2c] hover:text-[#ffffff] transition-colors duration-200 border border-[#444749]/40 min-h-[44px] min-w-[44px]"
               >
-                <FileText size={15} className="text-[#8e9193]" />
-                <span>Preview CV</span>
+                <FileText size={15} className="text-[#f7bd55]" />
+                <span>View Resume</span>
               </button>
             )}
           </div>
