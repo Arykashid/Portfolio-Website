@@ -8,7 +8,7 @@ export default function AchievementsSection() {
   return (
     <ScrollReveal
       id="achievements"
-      className="w-full max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-16 py-16 sm:py-24"
+      className="w-full max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-16 py-16 sm:py-24 scroll-mt-24"
     >
       {/* Section Header */}
       <div className="flex items-center gap-3 mb-8">

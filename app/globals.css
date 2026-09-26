@@ -30,11 +30,13 @@
 
   html {
     scroll-behavior: smooth;
+    /* Navbar is h-20 = 80px = 5rem; add 0.5rem breathing room */
     scroll-padding-top: 5.5rem;
     color-scheme: dark;
   }
 
   [id] {
+    /* Match scroll-padding-top so anchor links land with content visible */
     scroll-margin-top: 5.5rem;
   }
 
@@ -45,8 +47,8 @@
     overflow-x: hidden;
     margin: 0;
     padding: 0;
-    /* Responsive bottom clearance ensuring last page content scrolls fully above any fixed bottom bar or viewport chrome */
-    padding-bottom: max(env(safe-area-inset-bottom, 0px), 6rem);
+    /* Small bottom clearance for mobile browser chrome / safe-area */
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 }
 
@@ -99,6 +101,18 @@
   font-family: 'JetBrains Mono', monospace;
 }
 
+/* Global Scroll & Anchor Clearance */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+  scroll-padding-bottom: 6.5rem;
+}
+
+[id] {
+  scroll-margin-top: 6rem;
+  scroll-margin-bottom: 6.5rem;
+}
+
 /* Section Spacing Helpers */
 .py-space-2xl {
   padding-top: 5.5rem;
@@ -112,45 +126,40 @@
   }
 }
 
-/* 1. Subtle Skills Row Marquee Movement */
-/* Both rows shift LEFT so the animation always stays within left boundary.
-   Right edge is handled by a fade-out mask so last pill gracefully exits. */
-@keyframes marqueeLeft {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(-80px, 0, 0);
-  }
+/* 1. Skills Marquee — real seamless infinite scroll
+   The TRACK contains two identical flex children [Half A] + [Half B].
+   Each half ends with pr-3 matching gap-3.
+   We animate from translateX(0) to translateX(-50%) so it loops perfectly.
+   Row 1 & 3: scroll left. Row 2: scroll right (starts at -50%, goes to 0). */
+
+@keyframes marqueeScrollLeft {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }
 
-@keyframes marqueeRight {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(-40px, 0, 0);
-  }
+@keyframes marqueeScrollRight {
+  0%   { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
 
 .skills-row-left {
   display: flex;
   width: max-content;
-  animation: marqueeLeft 36s ease-in-out infinite alternate;
+  animation: marqueeScrollLeft var(--marquee-duration, 28s) linear infinite;
   will-change: transform;
 }
 
 .skills-row-right {
   display: flex;
   width: max-content;
-  animation: marqueeRight 42s ease-in-out infinite alternate;
+  animation: marqueeScrollRight var(--marquee-duration, 30s) linear infinite;
   will-change: transform;
 }
 
-/* Fade mask on the overflow container — graceful edge fading instead of hard clip */
-.skills-track-wrapper {
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 3%, black 92%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0%, black 3%, black 92%, transparent 100%);
+/* Pause animation on hover */
+.skills-track-wrapper:hover .skills-row-left,
+.skills-track-wrapper:hover .skills-row-right {
+  animation-play-state: paused;
 }
 
 
@@ -196,10 +205,14 @@
     transform: none !important;
     transition: none !important;
   }
+  /* Disable marquee; show first set of items statically */
   .skills-row-left,
   .skills-row-right {
     animation: none !important;
     transform: none !important;
+  }
+  .skills-track-wrapper {
+    overflow-x: auto;
   }
 }
 

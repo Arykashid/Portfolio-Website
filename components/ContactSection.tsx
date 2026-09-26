@@ -24,7 +24,7 @@ export default function ContactSection() {
   return (
     <ScrollReveal
       id="contact"
-      className="w-full max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-16 py-16 sm:py-24"
+      className="w-full max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-16 pt-16 sm:pt-24 pb-28 sm:pb-36 scroll-mt-24"
     >
       {/* Section Header */}
       <div className="flex items-center gap-3 mb-8">

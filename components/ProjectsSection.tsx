@@ -60,7 +60,7 @@ export default function ProjectsSection() {
   return (
     <ScrollReveal
       id="projects"
-      className="w-full max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-16 py-16 sm:py-24"
+      className="w-full max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-16 py-16 sm:py-24 scroll-mt-24"
     >
       {/* Section Header */}
       <div className="flex items-center gap-3 mb-8">
@@ -101,7 +101,7 @@ export default function ProjectsSection() {
                 fill
                 unoptimized
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover object-top rounded-xl group-hover/thumb:scale-[1.03] transition-transform duration-500 ease-out"
+                className="object-cover object-center rounded-xl group-hover/thumb:scale-[1.03] transition-transform duration-500 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#121315]/80 via-transparent to-transparent opacity-0 group-hover/thumb:opacity-100 transition-opacity duration-300 pointer-events-none flex items-end p-4">
                 <span className="font-label text-xs text-[#f7bd55] uppercase tracking-wider font-medium flex items-center gap-1.5">

@@ -5,7 +5,10 @@ import ScrollReveal from "./ScrollReveal";
 
 export default function AboutSection() {
   return (
-    <ScrollReveal id="about" className="w-full max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-16 py-16 sm:py-24">
+    <ScrollReveal
+      id="about"
+      className="w-full max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-16 py-16 sm:py-24 scroll-mt-24"
+    >
       {/* Section Header */}
       <div className="flex items-center gap-3 mb-8">
         <span className="font-section-marker text-xs sm:text-sm text-[#f7bd55] uppercase tracking-widest font-semibold">

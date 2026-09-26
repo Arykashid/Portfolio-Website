@@ -68,7 +68,7 @@ export default function RagTeachingAssistantPage() {
     <div className="min-h-screen bg-[#121315] text-[#e3e2e5] flex flex-col">
       <Navbar />
 
-      <main className="w-full pt-32 pb-16 flex-1">
+      <main className="w-full pt-28 sm:pt-28 pb-28 sm:pb-36 flex-1">
         <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-16 flex flex-col gap-12 sm:gap-16">
           {/* Top Breadcrumb & Metadata Bar */}
           <div className="flex flex-col gap-6">
@@ -121,7 +121,7 @@ export default function RagTeachingAssistantPage() {
           {/* 2-Slide Interactive Screenshot Carousel */}
           <figure className="w-full flex flex-col gap-4">
             {/* Quick-select Tab Strip */}
-            <div className="w-full max-w-full min-w-0 flex items-center gap-2 overflow-x-auto pb-1.5 scrollbar-none overscroll-x-contain">
+            <div className="-mx-5 sm:mx-0 px-5 sm:px-0 flex items-center gap-2 overflow-x-auto pb-1.5 scrollbar-none overscroll-x-contain">
               {slides.map((slide, idx) => {
                 const isActive = idx === currentSlide;
                 return (
@@ -146,7 +146,7 @@ export default function RagTeachingAssistantPage() {
             {/* Carousel Frame */}
             <div className="relative w-full rounded-2xl bg-[#1b1c1e] overflow-hidden shadow-2xl border border-[#444749]/30 group">
               {/* Active Image */}
-              <div className="relative w-full bg-[#0d0e10]">
+              <div className="relative w-full bg-[#0d0e10] flex items-center justify-center">
                 <Image
                   src={slides[currentSlide].src}
                   alt={slides[currentSlide].alt}
@@ -154,8 +154,9 @@ export default function RagTeachingAssistantPage() {
                   height={slides[currentSlide].height}
                   priority
                   unoptimized
-                  className="w-full h-auto object-contain block select-none"
+                  className="max-w-full h-auto object-contain block select-none mx-auto"
                   style={{
+                    maxHeight: "620px",
                     imageRendering: "-webkit-optimize-contrast",
                   }}
                 />

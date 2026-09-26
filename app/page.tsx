@@ -20,7 +20,7 @@ export default function Home() {
       <Navbar onResumeClick={() => setIsResumeOpen(true)} />
 
       {/* Main Content Sections */}
-      <main className="w-full pt-20 flex-1 flex flex-col overflow-x-hidden">
+      <main className="w-full pt-20 flex-1 flex flex-col">
         {/* 1. Hero Section (Photo stacks first on mobile) */}
         <HeroSection onResumeClick={() => setIsResumeOpen(true)} />
 

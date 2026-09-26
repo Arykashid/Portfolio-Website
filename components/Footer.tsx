@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <>
       <footer className="w-full bg-[#0d0e10] border-t border-[#444749]/20 mt-16 sm:mt-24">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-16 py-8 sm:py-12 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-16 pt-8 sm:pt-12 pb-20 sm:pb-28 flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Left: System Core Label & Copyright */}
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 text-center md:text-left">
             <span className="font-section-marker text-xs text-[#f7bd55] uppercase font-semibold">

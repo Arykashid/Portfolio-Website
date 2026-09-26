@@ -10,7 +10,10 @@ interface HeroSectionProps {
 
 export default function HeroSection({ onResumeClick }: HeroSectionProps) {
   return (
-    <section className="hero-entry-anim relative w-full max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-16 min-h-[calc(100vh-5rem)] flex items-center py-8 lg:py-16">
+    <section
+      id="hero"
+      className="hero-entry-anim relative w-full max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-16 min-h-[calc(100vh-5rem)] flex items-center py-8 lg:py-16 scroll-mt-24"
+    >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center w-full">
         {/* Photo Container: ORDER 1 ON MOBILE (appears first!), ORDER 1 on desktop */}
         <div className="order-1 lg:col-span-5 relative w-full h-[380px] sm:h-[480px] lg:h-[620px] rounded-2xl overflow-hidden bg-[#1b1c1e] shadow-2xl border border-[#444749]/30 group">
