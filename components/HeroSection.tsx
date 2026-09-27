@@ -3,20 +3,57 @@
 import React from "react";
 import Image from "next/image";
 import { ArrowDown, FileText, ArrowUpRight, MapPin } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 
 interface HeroSectionProps {
   onResumeClick?: () => void;
 }
 
 export default function HeroSection({ onResumeClick }: HeroSectionProps) {
+  const shouldReduceMotion = useReducedMotion();
+
+  // Smooth cubic-bezier for premium feel
+  const ease = [0.25, 0.1, 0.25, 1] as const;
+
+  // Factory: returns motion props for a subtle fade-up entrance
+  const fadeUp = (delay: number, duration = 0.65) =>
+    shouldReduceMotion
+      ? {
+          initial: { opacity: 0 },
+          animate: { opacity: 1 },
+          transition: { duration: 0.01 },
+        }
+      : {
+          initial: { opacity: 0, y: 12 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration, delay, ease },
+        };
+
   return (
     <section
       id="hero"
       className="hero-entry-anim relative w-full max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-16 min-h-[calc(100vh-5rem)] flex items-center py-8 lg:py-16 scroll-mt-24"
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center w-full">
-        {/* Photo Container: ORDER 1 ON MOBILE (appears first!), ORDER 1 on desktop */}
-        <div className="order-1 lg:col-span-5 relative w-full h-[380px] sm:h-[480px] lg:h-[620px] rounded-2xl overflow-hidden bg-[#1b1c1e] shadow-2xl border border-[#444749]/30 group">
+        {/* ── 1. Hero Image ── */}
+        <motion.div
+          className="order-1 lg:col-span-5 relative w-full h-[380px] sm:h-[480px] lg:h-[620px] rounded-2xl overflow-hidden bg-[#1b1c1e] shadow-2xl border border-[#444749]/30 group"
+          initial={
+            shouldReduceMotion
+              ? { opacity: 0 }
+              : { opacity: 0, scale: 0.985, y: 10 }
+          }
+          animate={
+            shouldReduceMotion
+              ? { opacity: 1 }
+              : { opacity: 1, scale: 1, y: 0 }
+          }
+          transition={
+            shouldReduceMotion
+              ? { duration: 0.01 }
+              : { duration: 0.75, delay: 0, ease }
+          }
+        >
           <Image
             src="/images/ary-hero-profile.jpg"
             alt="Ary Kashid - AI & Data Science Engineer"
@@ -44,12 +81,15 @@ export default function HeroSection({ onResumeClick }: HeroSectionProps) {
               FIG. 01
             </span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Text Content: ORDER 2 ON MOBILE (appears below photo) */}
         <div className="order-2 lg:col-span-7 flex flex-col justify-center">
-          {/* Status Pill */}
-          <div className="inline-flex items-center gap-2.5 self-start px-3.5 py-1.5 rounded-full bg-[#1b1c1e] border border-[#444749]/40 shadow-sm">
+          {/* ── 2. Status Badge ── */}
+          <motion.div
+            className="inline-flex items-center gap-2.5 self-start px-3.5 py-1.5 rounded-full bg-[#1b1c1e] border border-[#444749]/40 shadow-sm"
+            {...fadeUp(0.2)}
+          >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#f7bd55] opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#f7bd55]"></span>
@@ -57,47 +97,61 @@ export default function HeroSection({ onResumeClick }: HeroSectionProps) {
             <span className="font-label text-[11px] tracking-widest text-[#f4f4f5] uppercase font-medium">
               OPEN TO — ML / DATA SCIENCE OPPORTUNITIES
             </span>
-          </div>
+          </motion.div>
 
-          {/* Main Display Headline */}
+          {/* ── 3 & 4. Name + Title ── */}
           <div className="mt-5 space-y-2">
-            <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl text-[#ffffff] tracking-tight font-normal leading-[1.08]">
+            <motion.h1
+              className="font-display text-4xl sm:text-6xl lg:text-7xl text-[#ffffff] tracking-tight font-normal leading-[1.08]"
+              {...fadeUp(0.32)}
+            >
               Ary Kashid
-            </h1>
-            <p className="font-sans text-xl sm:text-2xl text-[#f7bd55] font-medium tracking-tight">
+            </motion.h1>
+            <motion.p
+              className="font-sans text-xl sm:text-2xl text-[#f7bd55] font-medium tracking-tight"
+              {...fadeUp(0.4)}
+            >
               AI &amp; Data Science Engineer
-            </p>
+            </motion.p>
           </div>
 
-          {/* Editorial Tagline */}
-          <p className="mt-5 font-sans text-base sm:text-lg text-[#c4c7c9] max-w-2xl leading-relaxed">
+          {/* ── 5. Description ── */}
+          <motion.p
+            className="mt-5 font-sans text-base sm:text-lg text-[#c4c7c9] max-w-2xl leading-relaxed"
+            {...fadeUp(0.5)}
+          >
             Engineering AI systems that see problems before they happen. Specializing in autonomous infrastructure resilience, time-series forecasting, and multimodal retrieval systems.
-          </p>
+          </motion.p>
 
-          {/* CTA Buttons */}
+          {/* ── 6. CTA Buttons (staggered) ── */}
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <a
+            <motion.a
               href="#projects"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#ffffff] text-[#121315] font-sans text-sm font-semibold hover:bg-[#f7bd55] transition-colors duration-200 shadow-lg min-h-[44px] min-w-[44px]"
+              {...fadeUp(0.6)}
             >
               <span>View Selected Works</span>
               <ArrowDown size={16} />
-            </a>
+            </motion.a>
 
             {onResumeClick && (
-              <button
+              <motion.button
                 type="button"
                 onClick={onResumeClick}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#1f2022] text-[#f4f4f5] font-sans text-sm font-medium hover:bg-[#292a2c] hover:text-[#ffffff] transition-colors duration-200 border border-[#444749]/40 min-h-[44px] min-w-[44px]"
+                {...fadeUp(0.68)}
               >
                 <FileText size={15} className="text-[#f7bd55]" />
                 <span>View Resume</span>
-              </button>
+              </motion.button>
             )}
           </div>
 
-          {/* Social Links & Location Marker Bar */}
-          <div className="mt-10 pt-6 flex flex-wrap items-center justify-between gap-4 border-t border-[#444749]/20">
+          {/* ── 7. GitHub / LinkedIn / Location ── */}
+          <motion.div
+            className="mt-10 pt-6 flex flex-wrap items-center justify-between gap-4 border-t border-[#444749]/20"
+            {...fadeUp(0.78, 0.6)}
+          >
             <div className="flex items-center gap-6">
               <a
                 href="https://github.com/Arykashid"
@@ -121,7 +175,7 @@ export default function HeroSection({ onResumeClick }: HeroSectionProps) {
             <span className="font-section-marker text-xs text-[#8e9193] tracking-wider">
               LOC: KOLHAPUR, INDIA
             </span>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
