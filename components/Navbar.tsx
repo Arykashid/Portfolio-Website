@@ -147,7 +147,7 @@ export default function Navbar({ onResumeClick }: NavbarProps) {
 
       {/* Mobile Drawer Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-20 bg-[#121315]/98 backdrop-blur-2xl border-b border-[#444749]/30 shadow-2xl animate-in slide-in-from-top-3 duration-200">
+        <div id="mobile-menu" className="lg:hidden fixed inset-x-0 top-20 bg-[#121315]/98 backdrop-blur-2xl border-b border-[#444749]/30 shadow-2xl animate-in slide-in-from-top-3 duration-200">
           <div className="px-6 py-6 flex flex-col gap-4">
             <div className="flex items-center gap-2 px-3 py-1.5 rounded bg-[#1b1c1e] border border-[#444749]/30 self-start">
               <span className="relative flex h-2 w-2">

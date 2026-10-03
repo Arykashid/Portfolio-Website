@@ -65,6 +65,12 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
           rel="stylesheet"
         />
+        {/* Synchronous session check: prevents flash of overlay on repeat visits */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(sessionStorage.getItem('ak_entrance_v4')){document.documentElement.classList.add('entrance-done');}}catch(e){}`,
+          }}
+        />
       </head>
       <body className="min-h-screen bg-[#121315] text-[#e3e2e5] antialiased selection:bg-[#f7bd55]/20 selection:text-[#f7bd55]">
         {children}

@@ -1,17 +1,32 @@
 "use client";
 
 import React, { useState } from "react";
-import { X, Key, Terminal, Code2 } from "lucide-react";
+import { X, Key, Code2 } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 
 export default function Footer() {
   const [modalContent, setModalContent] = useState<"colophon" | "pgp" | null>(
     null
   );
+  const shouldReduceMotion = useReducedMotion();
+  // Cinematic easeOutExpo — same feel used across all other sections
+  const ease = [0.22, 1, 0.36, 1] as const;
 
   return (
     <>
       <footer className="w-full bg-[#0d0e10] border-t border-[#444749]/20 mt-16 sm:mt-24">
-        <div className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-16 pt-8 sm:pt-12 pb-20 sm:pb-28 flex flex-col md:flex-row items-center justify-between gap-6">
+        <motion.div
+          className="max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-16 pt-8 sm:pt-12 pb-20 sm:pb-28 flex flex-col md:flex-row items-center justify-between gap-6"
+          initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
+          whileInView={
+            shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }
+          }
+          viewport={{ once: true, margin: "0px 0px -20px 0px" }}
+          transition={{
+            duration: shouldReduceMotion ? 0.01 : 0.55,
+            ease,
+          }}
+        >
           {/* Left: System Core Label & Copyright */}
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 text-center md:text-left">
             <span className="font-section-marker text-xs text-[#f7bd55] uppercase font-semibold">
@@ -46,7 +61,7 @@ export default function Footer() {
               PGP KEY
             </button>
           </div>
-        </div>
+        </motion.div>
       </footer>
 
       {/* Modal Overlay for Colophon / PGP */}
@@ -64,7 +79,7 @@ export default function Footer() {
                   </>
                 ) : (
                   <>
-                    <Key size={16} className="text-[#00daf3]" />
+                    <X size={16} className="text-[#00daf3]" />
                     <span className="font-section-marker text-xs text-[#00daf3] uppercase tracking-wider">
                       // CRYPTOGRAPHIC PUBLIC KEY
                     </span>

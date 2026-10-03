@@ -12,8 +12,20 @@ interface HeroSectionProps {
 export default function HeroSection({ onResumeClick }: HeroSectionProps) {
   const shouldReduceMotion = useReducedMotion();
 
+  // Fail-safe: ensure hero image and content are never left invisible on mobile
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      const heroPhoto = document.querySelector("#hero .order-1") as HTMLElement | null;
+      if (heroPhoto && window.getComputedStyle(heroPhoto).opacity === "0") {
+        heroPhoto.style.opacity = "1";
+        heroPhoto.style.transform = "none";
+      }
+    }, 1200);
+    return () => clearTimeout(timer);
+  }, []);
+
   // Smooth cubic-bezier for premium feel
-  const ease = [0.25, 0.1, 0.25, 1] as const;
+  const ease = [0.22, 1, 0.36, 1] as const;
 
   // Factory: returns motion props for a subtle fade-up entrance
   const fadeUp = (delay: number, duration = 0.65) =>

@@ -10,12 +10,15 @@ import AchievementsSection from "@/components/AchievementsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import ResumeModal from "@/components/ResumeModal";
+import PortfolioEntrance from "@/components/PortfolioEntrance";
 
 export default function Home() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#121315] text-[#e3e2e5] flex flex-col selection:bg-[#f7bd55]/25 selection:text-[#f7bd55]">
+      {/* Cinematic entrance overlay — plays once per session, then removes itself */}
+      <PortfolioEntrance />
       {/* Fixed Frosted Glass Navigation Bar */}
       <Navbar onResumeClick={() => setIsResumeOpen(true)} />
 

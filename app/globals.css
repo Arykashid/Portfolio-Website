@@ -50,6 +50,11 @@
     /* Small bottom clearance for mobile browser chrome / safe-area */
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
+
+  /* Immediate zero-delay entrance skip when already seen in current session */
+  html.entrance-done #portfolio-entrance {
+    display: none !important;
+  }
 }
 
 /* Tailwind Theme Extension */
@@ -176,15 +181,15 @@ html {
 }
 
 .hero-entry-anim {
-  animation: heroFadeIn 500ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: heroFadeIn 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
   will-change: opacity, transform;
 }
 
 /* 3. Scroll Reveal Animation */
 .scroll-reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 400ms cubic-bezier(0.16, 1, 0.3, 1), transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(20px);
+  transition: opacity 550ms cubic-bezier(0.22, 1, 0.36, 1), transform 550ms cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 
